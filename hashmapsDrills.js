@@ -90,25 +90,97 @@ HashMap.SIZE_RATIO = 3;
 //this.del+this.length-1/this.capacity
 //this.capacity * this.SIZE_RATIO;
 
-function main() {
-  const lor = new HashMap(10);
-console.log(lor.capacity, 'this is capacity') ;
-  lor.set('Hobbit', 'Bilbo');
-  console.log(lor.capacity, 'this is capacity at 97') ;
-  lor.set('Hobbit', 'Frodo');
-  // lor.set('Wizard', 'Gandolf');
-  lor.set('Human', 'Aragon');
-  lor.set('Elf', 'Legolas');
-  lor.set('Maiar', 'The Necromancer');
-  lor.set('Maiar', 'Sauron');
+// function main() {
+//   const lor = new HashMap(10);
 
-  lor.set('RingBearer', 'Gollum');
-  lor.set('LadyOfLight', 'Galadriel');
-  lor.set('HalfElven', 'Arwen');
-  lor.set('Ent', 'Treebeard');
+//   lor.set('Hobbit', 'Bilbo');
+//   lor.set('Hobbit', 'Frodo');
+//   lor.set('Wizard', 'Gandolf');
+//   lor.set('Human', 'Aragon');
+//   lor.set('Elf', 'Legolas');
+//   lor.set('Maiar', 'The Necromancer');
+//   lor.set('Maiar', 'Sauron');
+//   lor.set('RingBearer', 'Gollum');
+//   lor.set('LadyOfLight', 'Galadriel');
+//   lor.set('HalfElven', 'Arwen');
+//   lor.set('Ent', 'Treebeard');
+//   lor.set('HighElf', 'Elrond');
 
-  console.log(lor.get('Maiar'), '110');
-  console.log(lor);
+//   console.log(lor.capacity, 'this is capacity') ;
+//   console.log(lor.get('LadyOfLight'), '110');
+
+// }
+
+// main();
+
+function palindrome(str){
+  //input: 'acecarr';
+  //output: true
+  //explanation: 'acecarr' rearranged to 'racecar' is a palindrome
+  //create instance of our letter database
+  //create instance of singleLetter
+  //create instance of doubleletters
+  //loop through the string 
+  //if letter is in letter database the add to letter value plus one and doubleletters ++
+  //if not set(letter, 1) 
+  //
+  // const singleLetters = 1 || 0
+  // const doubleletters%2=0
+ 
+  // const letterDatabase = new HashMap();
+
+
+  //Option 1: Nik's mad scientist version
+  let singleLetters= 0;
+  let dupeletters= 0;
+  const obj = {};
+
+  for(let i=0; i<str.length; i++){
+    if(!obj[str[i]]){
+      obj[str[i]]=1;
+      // letterDatabase.set(str[i],1);
+    }else if(obj[str[i]]===1){
+      obj[str[i]]= obj[str[i]]+1;
+      // letterDatabase.set(str[i], obj[str[i]]);
+      dupeletters +=2;
+    }
+    else{
+      obj[str[i]]= obj[str[i]]+1;
+      // letterDatabase.set(str[i], obj[str[i]]);
+      dupeletters ++;
+    }
+  }
+
+  
+
+  Object.keys(obj).forEach(letter=>{
+    if(obj[letter] ===1){
+      singleLetters++;
+    }
+  });
+
+
+  console.log(obj);
+  console.log(dupeletters, 'dupeletters');
+  console.log(singleLetters, 'singleletters');
+  if((singleLetters ===0 || singleLetters ===1) && dupeletters%2===0){
+    return true;
+  }else{
+    return false;
+  }
+
 }
 
-main();
+console.log(palindrome('ddda'));
+
+
+
+// {
+//   a:1
+//   b:1
+//   c:1
+// }
+
+// racecar
+//ddaabbc
+//dadcdad
