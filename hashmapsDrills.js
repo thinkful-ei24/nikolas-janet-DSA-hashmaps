@@ -36,17 +36,25 @@ class HashMap {
   }
 
   set(key, value) {
-    if (this.del + this.length - 1 / this.capacity > HashMap.MAX_LOAD_RATIO) {
+    if ((this.del + this.length + 1)/ this.capacity > HashMap.MAX_LOAD_RATIO) {
       this._resize(this.capacity * HashMap.SIZE_RATIO);
     }
     const index = this._findSlot(key);
-    this.slots[index] = {
-      key,
-      value,
-      delete: false
-    };
-    this.length++;
-  }
+    
+    if(this.slots[index]===undefined || this.slots[index].key !==key){
+      this.slots[index] = {
+        key,
+        value,
+        delete: false
+      };
+      this.length++;
+    }else {
+      this.slots[index] = {
+        key,
+        value,
+        delete: false
+      };
+    }}
 
   _findSlot(key) {
     const hash = HashMap._hashString(key);
@@ -84,10 +92,11 @@ HashMap.SIZE_RATIO = 3;
 
 function main() {
   const lor = new HashMap(10);
-
+console.log(lor.capacity, 'this is capacity') ;
   lor.set('Hobbit', 'Bilbo');
+  console.log(lor.capacity, 'this is capacity at 97') ;
   lor.set('Hobbit', 'Frodo');
-  lor.set('Wizard', 'Gandolf');
+  // lor.set('Wizard', 'Gandolf');
   lor.set('Human', 'Aragon');
   lor.set('Elf', 'Legolas');
   lor.set('Maiar', 'The Necromancer');
@@ -98,7 +107,7 @@ function main() {
   lor.set('HalfElven', 'Arwen');
   lor.set('Ent', 'Treebeard');
 
-  console.log(lor.get('Maiar'));
+  console.log(lor.get('Maiar'), '110');
   console.log(lor);
 }
 
