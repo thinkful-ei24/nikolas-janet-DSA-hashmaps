@@ -175,12 +175,38 @@ console.log(palindrome('ddda'));
 
 
 
-// {
-//   a:1
-//   b:1
-//   c:1
-// }
+//input: array of words
+//output: array of arrays
+//each arry should be a grouping of words that are anagrms of each other
+//loop through each word in the array and get it's total ascII value by adding all of 
+//ASCII values for each letter
+//set the key as the total ASCII value
+//set the words as the key's value in an array. Use spread operator to not lose current array items
+//for each item (slot) in the hashMap, push that whole array into the new array
+//return new array
+function anagramGroup(arr){
+  const newArray=[];
+  const anagramDB = new HashMap();
+  arr.forEach(word=>{
+    let wordVal=0;
+    for(let letter of word){
+      wordVal += letter.charCodeAt(0);  
+    }
+    try{
+      anagramDB.set(wordVal, [word, ...anagramDB.get(wordVal)]);
+    }catch(error){
+      anagramDB.set(wordVal, [word]);
+    }
+    wordVal=0;
+  });
 
-// racecar
-//ddaabbc
-//dadcdad
+  anagramDB.slots.forEach(slot=>{
+    newArray.push(slot.value);
+  });
+
+
+console.log(newArray);
+
+}
+
+anagramGroup(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']);
